@@ -7,11 +7,13 @@ class LinkedList
     @head = nil
   end
 
-  def append(value)
+  def prepend(value)
     current_head = @head
     node = Node.new(value, current_head)
     @head = node
   end
+
+
 end
 
 class Node
