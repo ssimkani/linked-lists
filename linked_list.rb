@@ -3,8 +3,9 @@
 class LinkedList
   attr_accessor :head
 
-  def initialize
-    @head = nil
+  def initialize(head, tail)
+    @head = head
+    @tail = tail
   end
 
   def prepend(value)
