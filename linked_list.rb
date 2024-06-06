@@ -1,20 +1,27 @@
 # frozen_string_literal: true
 
 class LinkedList
-  attr_accessor :head
+  attr_accessor :head, :tail
 
-  def initialize(head, tail)
+  def initialize(head = nil, tail = nil)
     @head = head
     @tail = tail
   end
 
   def prepend(value)
-    current_head = @head
-    node = Node.new(value, current_head)
+    previous_head = @head
+    node = Node.new(value, previous_head)
     @head = node
+    @tail = node if @tail.nil?
   end
 
-
+  def append(value)
+    previous_tail = @tail
+    node = Node.new(value)
+    @tail = node
+    @head = node if @head.nil?
+    previous_tail.next_node = @tail unless previous_tail.nil?
+  end
 end
 
 class Node
