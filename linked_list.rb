@@ -36,7 +36,7 @@ class LinkedList
   end
 
   def to_s
-    list.each { |node| print "( #{node} ) -> " }
+    list.each { |node| print "( #{node.value} ) -> " }
     print 'nil'
   end
 
@@ -53,6 +53,11 @@ class LinkedList
       node == value
     end
     !included.empty?
+  end
+
+  def find(value)
+    element = list.select { |node| node.value == value }.first
+    list.index(element)
   end
 end
 
