@@ -32,6 +32,11 @@ class LinkedList
     node = Node.new(@list[index], @list[index + 1])
     node.value
   end
+
+  def to_s
+    list.each { |node| print "( #{node} ) -> " }
+    print 'nil'
+  end
 end
 
 class Node
