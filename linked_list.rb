@@ -15,6 +15,7 @@ class LinkedList
     node = Node.new(value, previous_head)
     @head = node
     @tail = node if @tail.nil?
+    @list.prepend(node)
     @size += 1
   end
 
@@ -24,18 +25,27 @@ class LinkedList
     @tail = node
     @head = node if @head.nil?
     previous_tail.next_node = @tail unless previous_tail.nil?
+    @list.append(node)
     @size += 1
   end
 
   def at(index)
     nil if index >= @size || index.negative? || @size.zero?
-    node = Node.new(@list[index], @list[index + 1])
+    node = Node.new(list[index], list[index + 1])
     node.value
   end
 
   def to_s
     list.each { |node| print "( #{node} ) -> " }
     print 'nil'
+  end
+
+  def pop
+    previous_tail = @tail
+    @tail = previous_tail.next_node
+    @list.delete(previous_tail)
+    @size -= 1
+    previous_tail
   end
 end
 
