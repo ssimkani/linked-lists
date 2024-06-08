@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class LinkedList
-  attr_accessor :head, :tail, :size
+  attr_accessor :head, :tail, :size, :list
 
   def initialize(head = nil, tail = nil, size = 0)
     @head = head
     @tail = tail
     @size = size
+    @list = []
   end
 
   def prepend(value)
@@ -24,6 +25,12 @@ class LinkedList
     @head = node if @head.nil?
     previous_tail.next_node = @tail unless previous_tail.nil?
     @size += 1
+  end
+
+  def at(index)
+    nil if index >= @size || index.negative? || @size.zero?
+    node = Node.new(@list[index], @list[index + 1])
+    node.value
   end
 end
 
