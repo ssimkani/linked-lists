@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class LinkedList
-  attr_accessor :head, :tail, :size, :list
+  attr_accessor :size, :list
 
-  def initialize(head = nil, tail = nil, size = 0)
-    @head = head
-    @tail = tail
-    @size = size
+  def initialize
     @list = []
+    @head = @list[0]
+    @tail = @list[-1]
+    @size = 0
   end
 
   def prepend(value)
@@ -30,14 +30,15 @@ class LinkedList
   end
 
   def at(index)
-    nil if index >= @size || index.negative? || @size.zero?
-    node = Node.new(list[index], list[index + 1])
-    node.value
+    return nil if index >= @size || @size.zero?
+
+    list[index].value
   end
 
   def to_s
-    list.each { |node| print "( #{node.value} ) -> " }
-    print 'nil'
+    arr = ['nil']
+    list.reverse_each { |node| arr.prepend("( #{node.value} )") }
+    arr.join(' -> ')
   end
 
   def pop
@@ -45,7 +46,7 @@ class LinkedList
     @tail = previous_tail.next_node
     @list.delete(previous_tail)
     @size -= 1
-    previous_tail
+    previous_tail.value
   end
 
   def contains?(value)
@@ -59,6 +60,31 @@ class LinkedList
     element = list.select { |node| node.value == value }.first
     list.index(element)
   end
+
+  def insert_at(value, index)
+    return unless index <= @size
+
+    node = Node.new(value, list[index + 1])
+    list.insert(index, node)
+    list[index - 1].next_node = list[index]
+    @size += 1
+  end
+
+  def remove_at(index)
+    return if index >= @size || @size.zero?
+
+    list.delete_at(index)
+    list[index - 1].next_node = list[index]
+    @size -= 1
+  end
+
+  def head
+    @head.value
+  end
+
+  def tail
+    @tail.value
+  end
 end
 
 class Node
@@ -69,3 +95,15 @@ class Node
     @next_node = next_node
   end
 end
+
+list = LinkedList.new
+list.append(1)
+list.append(2)
+list.append(3)
+list.append(4)
+list.append(5)
+list.prepend(6)
+list.insert_at(78, 6)
+list.remove_at(5)
+list.remove_at(0)
+puts list
