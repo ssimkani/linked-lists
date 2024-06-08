@@ -47,6 +47,13 @@ class LinkedList
     @size -= 1
     previous_tail
   end
+
+  def contains?(value)
+    included = list.select do |node|
+      node == value
+    end
+    !included.empty?
+  end
 end
 
 class Node
