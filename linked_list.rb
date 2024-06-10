@@ -30,7 +30,7 @@ class LinkedList
 
     current = @head
     index.times { current = current.next_node }
-    current
+    current.value
   end
 
   def pop
@@ -67,9 +67,13 @@ class LinkedList
   def insert_at(value, index)
     return unless index <= @size
 
-    node = Node.new(value, list[index + 1])
-    list.insert(index, node)
-    list[index - 1].next_node = list[index]
+    prepend(value) if index.zero?
+    append(value) if index == @size
+    node = Node.new(value)
+    current_node = @head
+    (index - 1).times { current_node = current_node.next_node }
+    current_node.next_node = node
+    node.next_node = current_node.next_node.next_node
     @size += 1
   end
 
