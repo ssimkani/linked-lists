@@ -119,15 +119,3 @@ class LinkedList
     current.value
   end
 end
-
-list = LinkedList.new
-list.append(1)
-list.append(2)
-list.append(3)
-list.prepend(0)
-list.append(4)
-list.append(50)
-list.insert_at(100, -1)
-list.remove_at(3)
-list.to_s
-p list.find(1)
