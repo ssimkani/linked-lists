@@ -2,6 +2,8 @@
 
 require_relative 'lib/linked_list'
 
+# linked_list object
+
 linked_list = LinkedList.new
 linked_list.append(1)
 linked_list.append(2)
