@@ -16,7 +16,7 @@ class LinkedList
   def append(value)
     new_node = Node.new(value)
     if @head.nil?
-      @head = node
+      @head = new_node
     else
       node = @head
       node = node.next_node while node.next_node
@@ -90,6 +90,15 @@ class LinkedList
     @size -= 1
   end
 
+  def to_s
+    current = @head
+    until current.nil?
+      print "( #{current.value} ) -> "
+      current = current.next_node
+    end
+    print 'nil'
+  end
+
   def head
     @head.value
   end
@@ -114,10 +123,5 @@ list = LinkedList.new
 list.append(1)
 list.append(2)
 list.append(3)
-list.append(4)
-list.append(5)
-list.prepend(6)
-list.insert_at(78, 6)
-list.remove_at(5)
-list.remove_at(0)
+list.prepend(0)
 list.to_s
