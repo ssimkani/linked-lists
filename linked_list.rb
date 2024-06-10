@@ -76,8 +76,13 @@ class LinkedList
   def remove_at(index)
     return if index >= @size || @size.zero?
 
-    list.delete_at(index)
-    list[index - 1].next_node = list[index]
+    if index.zero?
+      @head = @head.next_node
+    else
+      current_node = @head
+      (index - 1).times { current_node = current_node.next_node }
+      current_node = current_node.next_node.next_node
+    end
     @size -= 1
   end
 
