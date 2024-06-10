@@ -86,7 +86,9 @@ class LinkedList
   end
 
   def tail
-    @tail.value
+    current = @head
+    current = current.next_node until current.next_node.nil?
+    current.value
   end
 end
 
