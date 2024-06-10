@@ -26,6 +26,7 @@ class LinkedList
   end
 
   def at(index)
+    index += size + 1 if index.negative?
     return nil if index >= @size || @size.zero?
 
     current = @head
@@ -84,6 +85,7 @@ class LinkedList
   end
 
   def remove_at(index)
+    index += size + 1 if index.negative?
     return if index >= @size || @size.zero?
 
     if index.zero?
