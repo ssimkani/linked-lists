@@ -36,24 +36,32 @@ class LinkedList
   def pop
     node = @head
     (size - 2).times { node = node.next_node }
-    node.value = nil
+    popped_node = node.next_node
+    node.next_node = nil
     @size -= 1
-    node.next_node
+    popped_node
   end
 
   def contains?(value)
     current_node = @head
     until current_node.nil?
+      return true if current_node.value == value
+
+      current_node = current_node.next_node
     end
-    included = list.select do |node|
-      node == value
-    end
-    !included.empty?
+    false
   end
 
   def find(value)
-    element = list.select { |node| node.value == value }.first
-    list.index(element)
+    current_node = @head
+    index = 0
+    size.times do
+      return index if current_node.value == value
+
+      current_node = current_node.next_node
+      index += 1
+    end
+    nil
   end
 
   def insert_at(value, index)
