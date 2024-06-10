@@ -1,31 +1,27 @@
 # frozen_string_literal: true
 
 class LinkedList
-  attr_accessor :size, :list
+  attr_accessor :size
 
   def initialize
-    @list = []
-    @head = @list[0]
-    @tail = @list[-1]
+    @head = nil
     @size = 0
   end
 
   def prepend(value)
-    previous_head = @head
-    node = Node.new(value, previous_head)
-    @head = node
-    @tail = node if @tail.nil?
-    @list.prepend(node)
+    @head = Node.new(value, @head)
     @size += 1
   end
 
   def append(value)
-    previous_tail = @tail
-    node = Node.new(value)
-    @tail = node
-    @head = node if @head.nil?
-    previous_tail.next_node = @tail unless previous_tail.nil?
-    @list.append(node)
+    new_node = Node.new(value)
+    if @head.nil?
+      @head = node
+    else
+      node = @head
+      node = node.next_node while node.next_node
+      node.next_node = new_node
+    end
     @size += 1
   end
 
@@ -33,12 +29,6 @@ class LinkedList
     return nil if index >= @size || @size.zero?
 
     list[index].value
-  end
-
-  def to_s
-    arr = ['nil']
-    list.reverse_each { |node| arr.prepend("( #{node.value} )") }
-    arr.join(' -> ')
   end
 
   def pop
@@ -106,4 +96,4 @@ list.prepend(6)
 list.insert_at(78, 6)
 list.remove_at(5)
 list.remove_at(0)
-puts list
+list.to_s
