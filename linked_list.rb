@@ -65,15 +65,21 @@ class LinkedList
   end
 
   def insert_at(value, index)
-    return unless index <= @size
+    index += size + 1 if index.negative?
+    return unless index <= @size && index >= 0
 
-    prepend(value) if index.zero?
-    append(value) if index == @size
-    node = Node.new(value)
-    current_node = @head
-    (index - 1).times { current_node = current_node.next_node }
-    current_node.next_node = node
-    node.next_node = current_node.next_node.next_node
+    if index.zero?
+      prepend(value)
+    elsif index == @size
+      append(value)
+    else
+      node = Node.new(value)
+      current_node = @head
+      (index - 1).times { current_node = current_node.next_node }
+      node.next_node = current_node.next_node
+      current_node.next_node = node
+    end
+
     @size += 1
   end
 
@@ -85,7 +91,8 @@ class LinkedList
     else
       current_node = @head
       (index - 1).times { current_node = current_node.next_node }
-      current_node = current_node.next_node.next_node
+      node_to_remove = current_node.next_node
+      current_node.next_node = node_to_remove.next_node
     end
     @size -= 1
   end
@@ -96,7 +103,7 @@ class LinkedList
       print "( #{current.value} ) -> "
       current = current.next_node
     end
-    print 'nil'
+    puts 'nil'
   end
 
   def head
@@ -124,4 +131,6 @@ list.append(1)
 list.append(2)
 list.append(3)
 list.prepend(0)
+list.remove_at(0)
+puts list.size
 list.to_s
