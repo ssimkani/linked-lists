@@ -91,8 +91,7 @@ class LinkedList
     else
       current_node = @head
       (index - 1).times { current_node = current_node.next_node }
-      node_to_remove = current_node.next_node
-      current_node.next_node = node_to_remove.next_node
+      current_node.next_node = current_node.next_node.next_node
     end
     @size -= 1
   end
@@ -131,6 +130,6 @@ list.append(1)
 list.append(2)
 list.append(3)
 list.prepend(0)
-list.remove_at(0)
+list.remove_at(9)
 puts list.size
 list.to_s
