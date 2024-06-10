@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'node'
+
 class LinkedList
   attr_accessor :size
 
@@ -56,7 +58,7 @@ class LinkedList
   def find(value)
     current_node = @head
     index = 0
-    size.times do
+    (size - 1).times do
       return index if current_node.value == value
 
       current_node = current_node.next_node
@@ -118,15 +120,6 @@ class LinkedList
   end
 end
 
-class Node
-  attr_accessor :value, :next_node
-
-  def initialize(value = nil, next_node = nil)
-    @value = value
-    @next_node = next_node
-  end
-end
-
 list = LinkedList.new
 list.append(1)
 list.append(2)
@@ -134,5 +127,7 @@ list.append(3)
 list.prepend(0)
 list.append(4)
 list.append(50)
+list.insert_at(100, -1)
+list.remove_at(3)
 list.to_s
-p list.pop
+p list.find(1)
