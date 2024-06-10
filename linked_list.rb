@@ -34,14 +34,17 @@ class LinkedList
   end
 
   def pop
-    previous_tail = @tail
-    @tail = previous_tail.next_node
-    @list.delete(previous_tail)
+    node = @head
+    (size - 2).times { node = node.next_node }
+    node.value = nil
     @size -= 1
-    previous_tail.value
+    node.next_node
   end
 
   def contains?(value)
+    current_node = @head
+    until current_node.nil?
+    end
     included = list.select do |node|
       node == value
     end
