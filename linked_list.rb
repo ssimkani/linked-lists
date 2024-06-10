@@ -40,7 +40,7 @@ class LinkedList
     popped_node = node.next_node
     node.next_node = nil
     @size -= 1
-    popped_node
+    popped_node.value
   end
 
   def contains?(value)
@@ -135,4 +135,4 @@ list.prepend(0)
 list.append(4)
 list.append(50)
 list.to_s
-p list.at(3)
+p list.pop
