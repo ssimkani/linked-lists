@@ -28,7 +28,9 @@ class LinkedList
   def at(index)
     return nil if index >= @size || @size.zero?
 
-    list[index].value
+    current = @head
+    index.times { current = current.next_node }
+    current
   end
 
   def pop
