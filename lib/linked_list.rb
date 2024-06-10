@@ -2,19 +2,23 @@
 
 require_relative 'node'
 
+# This class represents the linked list data structure
 class LinkedList
   attr_accessor :size
 
+  # Initializes a new linked list with the head and size
   def initialize
     @head = nil
     @size = 0
   end
 
+  # Adds a new node with the given value to the front of the list
   def prepend(value)
     @head = Node.new(value, @head)
     @size += 1
   end
 
+  # Adds a new node with the given value to the end of the list
   def append(value)
     new_node = Node.new(value)
     if @head.nil?
@@ -27,6 +31,7 @@ class LinkedList
     @size += 1
   end
 
+  # Returns the node at the given index or nil if index is out of bounds
   def at(index)
     index += size if index.negative?
     return nil if index >= @size || @size.zero?
@@ -36,6 +41,7 @@ class LinkedList
     current.value
   end
 
+  # Removes and returns the last node of the linked list
   def pop
     node = @head
     (size - 2).times { node = node.next_node }
@@ -45,6 +51,7 @@ class LinkedList
     popped_node.value
   end
 
+  # Returns true if the value is in the list and false otherwise
   def contains?(value)
     current_node = @head
     until current_node.nil?
@@ -55,6 +62,7 @@ class LinkedList
     false
   end
 
+  # Returns the index of the value that is provided as an argument or nil if the value is not in the list
   def find(value)
     current_node = @head
     index = 0
@@ -67,6 +75,7 @@ class LinkedList
     nil
   end
 
+  # Inserts a new node with a given value and index
   def insert_at(value, index)
     index += size + 1 if index.negative?
     return unless index <= @size && index >= 0
@@ -86,6 +95,7 @@ class LinkedList
     @size += 1
   end
 
+  # Removes the node at the given index
   def remove_at(index)
     index += size if index.negative?
     return if index >= @size || @size.zero?
@@ -100,6 +110,7 @@ class LinkedList
     @size -= 1
   end
 
+  # Prints the linked list
   def to_s
     current = @head
     until current.nil?
@@ -109,10 +120,12 @@ class LinkedList
     puts 'nil'
   end
 
+  # Returns the head value
   def head
     @head.value
   end
 
+  # Returns the tail value
   def tail
     current = @head
     current = current.next_node until current.next_node.nil?
